@@ -92,6 +92,22 @@ public class Note implements ToElement {
         e = note.addElement("t");
         e.setText(String.valueOf(this.tick));
 
-        return null;
+        e = note.addElement("dur");
+        e.setText(String.valueOf(this.during));
+
+        e = note.addElement("n");
+        e.setText(String.valueOf(this.n));
+
+        e = note.addElement("v");
+        e.setText(String.valueOf(this.vel));
+
+        e = note.addElement("y");
+        e.addCDATA(this.lyric);
+
+        note.add(this.phoneme.toElement());
+
+        note.add(this.noteStyle.toElement());
+
+        return note;
     }
 }

@@ -2,8 +2,11 @@ package com.vsqx.model.pmt.style;
 
 import com.vsqx.enums.Style;
 import com.vsqx.exception.impl.StyleException;
+import com.vsqx.util.ToElement;
+import org.dom4j.Element;
+import org.dom4j.tree.BaseElement;
 
-public class NoteStyle {
+public class NoteStyle implements ToElement {
     private int accentValue;
 
     private int bendDepValue;
@@ -142,5 +145,49 @@ public class NoteStyle {
         if (vibTypeValue < Style.VIBTYPE.getMinValue() || vibTypeValue > Style.VIBTYPE.getMaxValue())
             throw new StyleException("The Value is Out of Range");
         this.vibTypeValue = vibTypeValue;
+    }
+
+    @Override
+    public Element toElement() {
+        Element nStyle = new BaseElement("nStyle");
+        Element e;
+
+        e = nStyle.addElement("v");
+        e.addAttribute("id", "accent");
+        e.setText(String.valueOf(this.getAccentValue()));
+
+        e = nStyle.addElement("v");
+        e.addAttribute("id", "bendDep");
+        e.setText(String.valueOf(this.getBendDepValue()));
+
+        e = nStyle.addElement("v");
+        e.addAttribute("id", "bendLen");
+        e.setText(String.valueOf(this.getBendLenValue()));
+
+        e = nStyle.addElement("v");
+        e.addAttribute("id", "decay");
+        e.setText(String.valueOf(this.getDecayValue()));
+
+        e = nStyle.addElement("v");
+        e.addAttribute("id", "fallPort");
+        e.setText(String.valueOf(this.getFallPortValue()));
+
+        e = nStyle.addElement("v");
+        e.addAttribute("id", "opening");
+        e.setText(String.valueOf(this.getOpeningValue()));
+
+        e = nStyle.addElement("v");
+        e.addAttribute("id", "risePort");
+        e.setText(String.valueOf(this.getRisePortValue()));
+
+        e = nStyle.addElement("v");
+        e.addAttribute("id", "vibLen");
+        e.setText(String.valueOf(this.getVibLenValue()));
+
+        e = nStyle.addElement("v");
+        e.addAttribute("id", "vibType");
+        e.setText(String.valueOf(this.getVibTypeValue()));
+
+        return nStyle;
     }
 }
