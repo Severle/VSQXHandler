@@ -12,6 +12,10 @@ public class ParameterCC implements AbstractParameter {
 
     private int tick;
 
+    public ParameterCC(CC cc) {
+        this.cc = cc;
+    }
+
     public ParameterCC(CC cc, int value, int tick) {
         this.cc = cc;
         this.value = value;

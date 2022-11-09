@@ -1,12 +1,16 @@
 package com.vsqx.model.pmt.style;
 
 import com.vsqx.enums.Style;
+import com.vsqx.enums.Type;
 import com.vsqx.exception.impl.StyleException;
 import com.vsqx.util.ToElement;
 import org.dom4j.Element;
 import org.dom4j.tree.BaseElement;
 
-public class NoteStyle implements ToElement {
+public class EntryStyle implements ToElement {
+
+    private Type type;
+
     private int accentValue;
 
     private int bendDepValue;
@@ -25,7 +29,7 @@ public class NoteStyle implements ToElement {
 
     private int vibTypeValue;
 
-    public NoteStyle(int accentValue, int bendDepValue, int bendLenValue, int decayValue, int fallPortValue, int openingValue, int risePortValue, int vibLenValue, int vibTypeValue) {
+    public EntryStyle(int accentValue, int bendDepValue, int bendLenValue, int decayValue, int fallPortValue, int openingValue, int risePortValue, int vibLenValue, int vibTypeValue) {
         try {
             this.setAccentValue(accentValue);
             this.setBendDepValue(bendDepValue);
@@ -41,20 +45,32 @@ public class NoteStyle implements ToElement {
         }
     }
 
-    public NoteStyle(NoteStyle noteStyle) {
+    public EntryStyle(EntryStyle entryStyle) {
         try {
-            this.setAccentValue(noteStyle.getAccentValue());
-            this.setBendDepValue(noteStyle.getBendDepValue());
-            this.setBendLenValue(noteStyle.getBendLenValue());
-            this.setDecayValue(noteStyle.getDecayValue());
-            this.setFallPortValue(noteStyle.getFallPortValue());
-            this.setOpeningValue(noteStyle.getOpeningValue());
-            this.setRisePortValue(noteStyle.getRisePortValue());
-            this.setVibLenValue(noteStyle.getVibLenValue());
-            this.setVibTypeValue(noteStyle.getVibTypeValue());
+            this.setAccentValue(entryStyle.getAccentValue());
+            this.setBendDepValue(entryStyle.getBendDepValue());
+            this.setBendLenValue(entryStyle.getBendLenValue());
+            this.setDecayValue(entryStyle.getDecayValue());
+            this.setFallPortValue(entryStyle.getFallPortValue());
+            this.setOpeningValue(entryStyle.getOpeningValue());
+            this.setRisePortValue(entryStyle.getRisePortValue());
+            this.setVibLenValue(entryStyle.getVibLenValue());
+            this.setVibTypeValue(entryStyle.getVibTypeValue());
         } catch (StyleException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public EntryStyle(Type type) {
+        this.type = type;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public int getAccentValue() {
@@ -149,7 +165,7 @@ public class NoteStyle implements ToElement {
 
     @Override
     public Element toElement() {
-        Element nStyle = new BaseElement("nStyle");
+        Element nStyle = new BaseElement(this.type.getType());
         Element e;
 
         e = nStyle.addElement("v");

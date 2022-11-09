@@ -1,6 +1,7 @@
 package com.vsqx.model.note;
 
-import com.vsqx.model.pmt.style.NoteStyle;
+import com.vsqx.enums.Type;
+import com.vsqx.model.pmt.style.EntryStyle;
 import com.vsqx.util.ToElement;
 import org.dom4j.Element;
 import org.dom4j.tree.BaseElement;
@@ -18,7 +19,11 @@ public class Note implements ToElement {
 
     private Phoneme phoneme;
 
-    private NoteStyle noteStyle;
+    private EntryStyle noteStyle;
+
+    {
+        this.noteStyle = new EntryStyle(Type.STYLE_TYPE_NOTE);
+    }
 
     public Note(int tick, int during, int n, int vel, String lyric) {
         this.tick = tick;
@@ -76,11 +81,11 @@ public class Note implements ToElement {
         this.phoneme = phoneme;
     }
 
-    public NoteStyle getNoteStyle() {
+    public EntryStyle getNoteStyle() {
         return noteStyle;
     }
 
-    public void setNoteStyle(NoteStyle noteStyle) {
+    public void setNoteStyle(EntryStyle noteStyle) {
         this.noteStyle = noteStyle;
     }
 
